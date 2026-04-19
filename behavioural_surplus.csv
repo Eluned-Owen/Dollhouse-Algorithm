@@ -1,0 +1,33 @@
+Room,Card,Risk Model,Unpredictability Model,Concealment Model,Obsession Model
+"Study", "Rarely responds to messages immediately across online platforms", -5, -7, 7, -7
+"Study", "Tracks personal health metrics manually using online tools or spreadsheets", 8, -7, -8, 7
+"Study", "Uses private browsing mode regularly when browsing online", 6, -6, 8, -6
+"Study", "Clears browser history often after internet sessions", 8, 6, 9, -5
+"Study", "Maintains minimal online presence", -8, 5, 9, -7
+"Study", "Tracks time spent on tasks using productivity software", 7, -7, -7, 5
+"Study", "Logs physical activity data into digital tracking systems", 5, -5, -7, 7
+"Study", "Uses productivity apps daily to organise digital workflow", 6, -5, -7, 8
+"Bedroom", "Visits NHS or medical websites frequently via personal devices", 7, 5, 5, 9
+"Bedroom", "Searches symptoms late at night on mobile or social platforms", 9, 5, -6, 7
+"Bedroom", "Wakes up at the same time every day and checks social feeds", 8, -9, -5, 9
+"Bedroom", "Posts frequently on social media", -7, -6, -7, 8
+"Bedroom", "Oversleeps on work days after late-night device use", -5, 7, 2, -5
+"Bedroom", "Often active online after midnight", -5, 7, 2, -5
+"Bedroom", "Deletes posts with low engagement", 9, 7, 5, 9
+"Bedroom", "Social media post suggests they rarely spend weekends at home", 5, 9, 4, -6
+"Living room", "Cancels plans on short notice with friends", -5, 9, 6, -5
+"Living room", "Has no active social media accounts", -10, 5, 7, -6
+"Living room", "Rarely initiates conversations in social settings", 7, 6, 6, -7
+"Living room", "Leaves home at inconsistent times", -4, 9, 7, -8
+"Living room", "Communicates only when necessary during in-person interactions", 6, 5, 9, -8
+"Living room", "Travel patterns do not follow routine", 5, 9, 5, -5
+"Living room", "Frequently changes location on weekends", 7, 9, 5, -5
+"Living room", "Goes to the local pub multiple times a week", -6, 6, -5, -6
+"Kitchen", "Buys vitamins and supplements frequently as part of health routine", 4, 4, 5, 9
+"Kitchen", "Rarely uses loyalty cards or subscriptions when shopping", -5, -8, -7, -5
+"Kitchen", "Few recorded purchasing habits", -4, -6, -7, -5
+"Kitchen", "Rarely makes impulse purchases when shopping", 6, -8, -8, -4
+"Kitchen", "Eats meals at constant times as part of a health routine", -4, -7, -5, -2
+"Kitchen", "Checks bank balance daily to monitor finances", 9, 8, -4, 5
+"Kitchen", "Exercises at scheduled times each week", -4, -6, -5, 7
+"Kitchen", "Spends more money when socialising on food and drink", 7, 5, -3, -3
