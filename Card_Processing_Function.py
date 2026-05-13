@@ -2,6 +2,18 @@ import time
 
 def card_analyser(player, ser, model_picked, cards):
 
+    global jailed_count
+    global jailed_player
+    jailed_count = []
+    jailed_player = []
+
+    #if someone gets a score over 100, jail them by adding the player name to a list to know when to skip a turn and a counter to know if people are still playing
+    if player.score >= 100:
+        jailed_player.append(player.name)
+        if player.name in jailed_player:
+            print("=== You have been jailed ===")
+        jailed_count.append("")
+
     collected_cards = []
 
     #Wait briefly so both NFC readers can finish sending
@@ -30,7 +42,15 @@ def card_analyser(player, ser, model_picked, cards):
     for i in collected_cards:
         card_finder = cards.iloc[i]
         score = card_finder[model_picked].item()
-        score_tally.append(score)
+
+        cards.loc[i, player.name] += 1
+        if cards.loc[i, player.name] == 3:
+            print("You can use", card_finder['Card'], "only once more")
+        if cards.loc[i, player.name] >= 4:
+            print("You've used", card_finder['Card'], "too much")
+            break
+        else:
+            score_tally.append(score)
 
     print(score_tally)
 
@@ -38,9 +58,23 @@ def card_analyser(player, ser, model_picked, cards):
     for item in score_tally:
         turn_score += item
 
+    global finished_players
+    global finished_player_name
+
+    finished_players = 0
+    finished_player_name = 0
+
     print("score = ", turn_score)
     player.score = player.score + turn_score
     print("new score for", player.name, ": ", player.score)
 
+    if player.score <= 0:
+        finished_players = finished_players + 1
+        finished_player_name = player.name
+
     #Clear leftover serial noise
     ser.reset_input_buffer()
+
+    return finished_players, finished_player_name, jailed_count
+
+    
