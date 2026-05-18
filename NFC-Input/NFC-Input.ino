@@ -43,8 +43,9 @@ void setup() {
 
 void loop() {
   buttonValue = digitalRead(BUTTONPIN);
+  //Serial.println(buttonValue);
 
-  if (buttonValue == 0) {
+  if (buttonValue == 1) {
     //Serial.println("Analysing cards...");
 
     // Reader 1
