@@ -1,6 +1,7 @@
 import time
 
-def card_analyser(player, ser, lcd, model_picked, cards):
+
+def card_analyser(player, ser, lcd, model_picked, cards, send_to_lcd, playing):
     #turn_text = "Your turn"
     #turn_text_encoded = turn_text("utf-8")
     #lcd.write(turn_text_encoded)
@@ -65,25 +66,42 @@ def card_analyser(player, ser, lcd, model_picked, cards):
     global finished_players
     global finished_player_name
 
+    global player_score
+    global player_name
+    global player_number
+
+    global player_one_score
+    global player_two_score 
+    global player_three_score
+
     finished_players = 0
     finished_player_name = 0
 
     print("score = ", turn_score)
     player.score = player.score + turn_score
     print("new score for", player.name, ": ", player.score)
+    player_score = player.score
+    player_name = player.name
     new_score = "{name} score:\n {score}".format(name = player.name, score = player.score)
+
+    if player_name.endswith("1"):
+        player_number = 1
+    elif player_name.endswith("2"):
+        player_number = 2
+    elif player_name.endswith("3"):
+        player_number = 3
 
     if player.score <= 0:
         finished_players = finished_players + 1
         finished_player_name = player.name
 
     #Sending the new scores bytes to the LCD to display
-    score_new_encoded = new_score.encode("utf-8")
-    lcd.write(score_new_encoded)
+    #score_new_encoded = new_score.encode("utf-8")
+    #lcd.write(score_new_encoded)
+
 
     #Clear leftover serial noise
     ser.reset_input_buffer()
 
-    return finished_players, finished_player_name, jailed_count
-
+    return finished_players, finished_player_name, jailed_count, player_score, player_name, player_number
     

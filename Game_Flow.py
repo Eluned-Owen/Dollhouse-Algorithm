@@ -24,7 +24,11 @@ if Game_Start == "y" :
         def __init__(self, name, score):
             self.name = name
             self.score = score
-            
+
+    def send_to_lcd(screen_number, line1, line2=""):
+            message = f"LCD{screen_number}|{line1}|{line2}\n"
+            lcd.write(message.encode("utf-8"))
+        
 
     #Next, I need to find a way to change the values of the player scores
     i = 0
@@ -51,6 +55,10 @@ if Game_Start == "y" :
     #Loading in the cards
     cards = pandas.read_csv("behavioural_surplus.csv")
 
+    title = "Dollhouse Algo"
+    doll_title = title.encode("utf-8")
+    
+
     print("===== Game Start =====")
 
     turn = 1
@@ -62,23 +70,35 @@ if Game_Start == "y" :
             #if there is data in the serial buffer, run the card analyser function for the current player, then reset the buffer and move on to the next player
             if ser.in_waiting > 0:
                 #"finished_players, finished_player_name" calls the function but also keeps track of when a player has reached 0 points and who
-                finished_players, finished_player_name, jailed_count = card_analyser(players[j], ser, lcd, model_picked, cards)
+                finished_players, finished_player_name, jailed_count, player_score, player_name, player_number = card_analyser(players[j], ser, lcd, model_picked, cards, send_to_lcd, playing)
                 ser.reset_input_buffer()
 
+                send_to_lcd(player_number,  f"{player_name} score:", str(player_score))
                 j = j + 1
-            
-    #Round end and game end logic
-    print("===== Turn", turn, "end =====")
-    turn = turn + 1
 
-       # if len(players) > 1 and len(jailed_count) >= playing:
-        #    print("All players have been jailed by the algorithm, try again next time :)")
-        #    break
-       # if len(players) == 1 and len(jailed_count) >= playing:
-        #    print("You have been jailed by the algorithm, try again next time :)")
+        turn = turn + 1
+        #time.sleep(4)
 
-       # if finished_players == 1:
-        #    print("========", finished_player_name, "has reached 0 points, game over! ========")
-        #    break
-    if turn >= 9:
-        print("==== Game Over ====")
+        #send_to_lcd(1, f"turn {turn} end", " ")
+        #send_to_lcd(2, f"turn {turn} end", " ")
+        #send_to_lcd(3, f"turn {turn} end", " ")
+        print("== end turn", turn, "==")
+
+        #time.sleep(4)
+        #send_to_lcd(1,  "player_one score:", f"{player_1.score}")
+
+        if len(players) > 1 and len(jailed_count) >= playing:
+            print("All players have been jailed by the algorithm, try again next time :)")
+            break
+        if len(players) == 1 and len(jailed_count) >= playing:
+            print("You have been jailed by the algorithm, try again next time :)")
+
+        if finished_players == 1:
+            print("========", finished_player_name, "has reached 0 points, game over! ========")
+            break
+        if turn >= 9:
+            send_to_lcd(1, f"Game end", " ")
+            send_to_lcd(2, f"Game end", " ")
+            send_to_lcd(3, f"Game end", " ")
+            print("== game end ==")
+
