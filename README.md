@@ -6,7 +6,7 @@ identifying what traits the algorithm is biased towards and then building a digi
 cards on the "Card Analyser" which contains two NFC readers and a button, where the cards will be communicated to the laptop via serial, the cards will be processed and the
 resulting score of the combination would output onto the players LCD screen. The aim of the game is to get to 0%, and if this is played multiplayer, who gets to 0% first.
 
-<h3> Getting Started <h3>
+<h3> Getting Started </h3>
 <p>The project needs the following physical components:
 3 x LCD
 1 x Button
