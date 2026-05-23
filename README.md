@@ -7,29 +7,34 @@ cards on the "Card Analyser" which contains two NFC readers and a button, where 
 resulting score of the combination would output onto the players LCD screen. The aim of the game is to get to 0%, and if this is played multiplayer, who gets to 0% first.
 
 <h3> Getting Started </h3>
-<p>The project needs the following physical components:
+The project needs the following physical components:
 <ul>
 <li>3 x LCD</li>
 <li>1 x Button</li>
-1 x Arduino Leonardo 
-1 x Arduino Uno R4 WiFi
-1 x 8-channel level shifter
-1 x Medium Bread board
-1 x Mini Bread Board
-2 x NFC readers
-1 x Laptop for Serial communications  
+<li>1 x Arduino Leonardo </li>
+<li>1 x Arduino Uno R4 WiFi</li>
+<li>1 x 8-channel level shifter</li>
+<li>1 x Medium Bread board</li>
+<li>1 x Mini Bread Board</li>
+<li>2 x NFC readers</li>
+<li>1 x Laptop for Serial communications  </li>
 </ul>
 
 
 The project depends on the following digital libraries:
 Python:
-PySerial
-Random
-Pandas
-Time
+<ul>
+<li>PySerial</li>
+<li>Random</li>
+<li>Pandas</li>
+<li>Time </li>
+</ul>
+
 
 Arduino IDE (C++):
-Wire
-Adafruit_LiquidCrystal
-SPI
-MFRC522</p>
+<ul>
+<li>Wire</li>
+<li>Adafruit_LiquidCrystal</li>
+<li>SPI</li>
+<li>MFRC522</li>
+</ul>
