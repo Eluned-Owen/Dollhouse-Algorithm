@@ -31,3 +31,5 @@ Room,Card,Risk Model,Unpredictability Model,Concealment Model,Obsession Model,pl
 "Kitchen", "Checks bank balance daily to monitor finances", 11, 9, -3, 7, 0, 0, 0, 0
 "Kitchen", "Exercises at scheduled times each week", -5, -11, -5, 12, 0, 0, 0, 0
 "Kitchen", "Spends more money when socialising on food and drink", 8, 6, -4, -3, 0, 0, 0, 0
+"Test", "Has a local business in the area", -25, -25, -25, -25, 0, 0, 0, 0
+"Test", "Travels for work at the same time everyday", -25, -25, -25, -25, 0, 0, 0, 0

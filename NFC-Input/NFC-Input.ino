@@ -20,10 +20,12 @@ MFRC522 mfrc522_1(SS_1, RST_PIN);
 MFRC522 mfrc522_2(SS_2, RST_PIN);
 
 
-
 void setup() {
-  //Initialise serial communications with the PC
-  Serial.begin(9600);
+  //Initialise serial communications with the PC for debugging
+  //Serial.begin(9600);
+
+  //Initialise bluetooth serial communications
+  Serial1.begin(9600);
 
   // sets the button pin to an input
   pinMode(BUTTONPIN, INPUT);
@@ -39,27 +41,28 @@ void setup() {
   //Starting the MFRC522 instance
   mfrc522_1.PCD_Init();
   mfrc522_2.PCD_Init();
+
+  Serial1.println("READY");
 }
 
 void loop() {
   buttonValue = digitalRead(BUTTONPIN);
-  //Serial.println(buttonValue);
 
   if (buttonValue == 1) {
-    //Serial.println("Analysing cards...");
+    //Serial1.println("Starting Scan");
 
-    // Reader 1
+    // Reader 1 =====
     digitalWrite(SS_2, HIGH);
     digitalWrite(SS_1, LOW);
 
+    //If theres a new card present and theres bytes to read in the serial, read them
     if (mfrc522_1.PICC_IsNewCardPresent() &&
         mfrc522_1.PICC_ReadCardSerial()) {
 
-        //Serial.println("Reader 1 detected");
-        readCard(mfrc522_1);
-    }
+        String cardText = readCard(mfrc522_1);
 
-    //delay(1000);
+        Serial1.println(cardText);
+    }
     
     // Reader 2
     digitalWrite(SS_1, HIGH);
@@ -68,11 +71,18 @@ void loop() {
     if (mfrc522_2.PICC_IsNewCardPresent() &&
         mfrc522_2.PICC_ReadCardSerial()) {
 
-        //Serial.println("Reader 2 detected");
-        readCard(mfrc522_2);
+        String cardText = readCard(mfrc522_2);
+
+        Serial1.println(cardText);
     }
 
-    //delay(500);
+    //Keeping them on for the next combination
+    digitalWrite(SS_1, HIGH);
+    digitalWrite(SS_2, HIGH);
+
+    //Debounce
+    delay(300); 
+
   }  
 }
 
@@ -90,14 +100,6 @@ void readCard(MFRC522 &reader) {
   for (int i = 0; i < 4; i++) {
     //Get all the status codes in the MFRC instance and save them in status
     MFRC522::StatusCode status = reader.MIFARE_Read(page, buffer, &len);
-
-
-    //If the status code is not OK, let the user know the reading failed and why
-    /* if (status != MFRC522::STATUS_OK) {
-      Serial.print("Read failed: ");
-      Serial.println(reader.GetStatusCodeName(status));
-      return;
-    } */
 
     //Each read = 16 bytes
     for (int j = 0; j < 16; j++) {
@@ -118,7 +120,6 @@ void readCard(MFRC522 &reader) {
   
 
   //Clean up common NFC/NDEF junk 
-  //If text doesnt start with an "int", substring em by 10?
   if (text.startsWith("Ten")) {
     text = text.substring(3);
   }
@@ -127,9 +128,6 @@ void readCard(MFRC522 &reader) {
   }
   text.trim();
   Serial.println(text);
-
-  //delay(3000);
-
 
   reader.PICC_HaltA();
   reader.PCD_StopCrypto1();
