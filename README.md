@@ -8,15 +8,18 @@ resulting score of the combination would output onto the players LCD screen. The
 
 <h3> Getting Started </h3>
 <p>The project needs the following physical components:
-3 x LCD
-1 x Button
+<ul>
+<li>3 x LCD</li>
+<li>1 x Button</li>
 1 x Arduino Leonardo 
 1 x Arduino Uno R4 WiFi
 1 x 8-channel level shifter
 1 x Medium Bread board
 1 x Mini Bread Board
 2 x NFC readers
-1 x Laptop for Serial communications 
+1 x Laptop for Serial communications  
+</ul>
+
 
 The project depends on the following digital libraries:
 Python:
