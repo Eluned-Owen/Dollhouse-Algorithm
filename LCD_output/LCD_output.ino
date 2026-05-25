@@ -2,9 +2,9 @@
 #include <Adafruit_LiquidCrystal.h>
 
 //Initialising the LCDs 
-Adafruit_LiquidCrystal lcd_1(0);
+Adafruit_LiquidCrystal lcd_1(2);
 Adafruit_LiquidCrystal lcd_2(1);
-Adafruit_LiquidCrystal lcd_3(2);
+Adafruit_LiquidCrystal lcd_3(0);
 
 void setup() {
   Serial.begin(9600);

@@ -6,7 +6,9 @@ help control the data payload.*/
 #include <SPI.h>
 #include <MFRC522.h>
 
+
 #define BUTTONPIN 3
+#define LEDPIN 9
 int buttonValue = 0;
 int prevButton = 0;
 
@@ -19,6 +21,8 @@ int prevButton = 0;
 MFRC522 mfrc522_1(SS_1, RST_PIN);
 MFRC522 mfrc522_2(SS_2, RST_PIN);
 
+#define Serial1 _UART2_
+
 
 void setup() {
   //Initialise serial communications with the PC for debugging
@@ -28,8 +32,10 @@ void setup() {
   Serial1.begin(9600);
 
   // sets the button pin to an input
-  pinMode(BUTTONPIN, INPUT);
-  digitalWrite(BUTTONPIN, HIGH);
+  pinMode(BUTTONPIN, INPUT_PULLUP);
+
+  pinMode(LEDPIN, OUTPUT);
+  digitalWrite(LEDPIN, HIGH);
 
   pinMode(SS_1, OUTPUT);
   pinMode(SS_2, OUTPUT);
@@ -48,22 +54,23 @@ void setup() {
 void loop() {
   buttonValue = digitalRead(BUTTONPIN);
 
-  if (buttonValue == 1) {
-    //Serial1.println("Starting Scan");
+  if (prevButton == HIGH && buttonValue == LOW) {
+    // Button was just pressed
 
-    // Reader 1 =====
+    // Reader 1
     digitalWrite(SS_2, HIGH);
     digitalWrite(SS_1, LOW);
 
-    //If theres a new card present and theres bytes to read in the serial, read them
     if (mfrc522_1.PICC_IsNewCardPresent() &&
         mfrc522_1.PICC_ReadCardSerial()) {
 
-        String cardText = readCard(mfrc522_1);
-
-        Serial1.println(cardText);
+      String cardText = readCard(mfrc522_1);
+      Serial1.println(cardText);
+      //Serial.println(cardText);
     }
-    
+
+    delay(100);
+
     // Reader 2
     digitalWrite(SS_1, HIGH);
     digitalWrite(SS_2, LOW);
@@ -71,65 +78,63 @@ void loop() {
     if (mfrc522_2.PICC_IsNewCardPresent() &&
         mfrc522_2.PICC_ReadCardSerial()) {
 
-        String cardText = readCard(mfrc522_2);
-
-        Serial1.println(cardText);
+      String cardText = readCard(mfrc522_2);
+      Serial.println(cardText);
+      //Serial.println(cardText);
     }
 
-    //Keeping them on for the next combination
     digitalWrite(SS_1, HIGH);
     digitalWrite(SS_2, HIGH);
 
-    //Debounce
-    delay(300); 
+    delay(300); // debounce
+  }
 
-  }  
+  prevButton = buttonValue;
 }
 
-void readCard(MFRC522 &reader) {
-  //18 because theres 4 pages with 4 bytes each 4*4=16 + a couple of extra space for internal data
+String readCard(MFRC522 &reader) {
   byte buffer[18];
-  byte len = sizeof(buffer);
-
   String text = "";
 
-  // Start at page 4 
   byte page = 4;
 
-  // Read multiple pages 
   for (int i = 0; i < 4; i++) {
-    //Get all the status codes in the MFRC instance and save them in status
+    byte len = sizeof(buffer);
+
     MFRC522::StatusCode status = reader.MIFARE_Read(page, buffer, &len);
 
-    //Each read = 16 bytes
+    if (status != MFRC522::STATUS_OK) {
+      return "READ_FAILED";
+    }
+
     for (int j = 0; j < 16; j++) {
       byte b = buffer[j];
-      
-      //If b hits the end of the data, break the loop
-      if (b == 0x00) {
-            break;
-        }
 
-      //Keep only readable ASCII characters
+      if (b == 0x00) {
+        break;
+      }
+
       if (b >= 32 && b <= 126) {
         text += (char)b;
       }
     }
-    //Move to next block of pages
-    page += 4; 
-  
 
-  //Clean up common NFC/NDEF junk 
+    page += 4;
+  }
+
+  // Clean up common NFC/NDEF junk AFTER all pages have been read
   if (text.startsWith("Ten")) {
     text = text.substring(3);
   }
-  if (text.length() > 2) {
+
+  if (text.length() > 10) {
     text = text.substring(10);
   }
+
   text.trim();
-  Serial.println(text);
 
   reader.PICC_HaltA();
   reader.PCD_StopCrypto1();
-}
+
+  return text;
 }

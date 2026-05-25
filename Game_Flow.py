@@ -59,7 +59,7 @@ if Game_Start == "y" :
             #if there is data in the serial buffer, run the card analyser function for the current player, then reset the buffer and move on to the next player
             if ser.in_waiting > 0:
                 #"finished_players, finished_player_name" calls the function but also keeps track of when a player has reached 0 points, who reaches 0 points and if anyone has gone to jail
-                finished_players, finished_player_name, jailed_count, player_score, player_name, player_number = card_analyser(players[j], ser, lcd, model_picked, cards, send_to_lcd, playing)
+                finished_players, finished_player_name, jailed_count, player_score, player_name, player_number = card_analyser(players[j], ser, model_picked, cards)
                 ser.reset_input_buffer()
 
                 #Sending the player data to the send_to_lcd function where it will then end it to the LCDs
