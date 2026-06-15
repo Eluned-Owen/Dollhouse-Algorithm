@@ -1,96 +1,102 @@
 import time
 
 
-def card_analyser(player, ser, model_picked, cards):
-    global jailed_count
-    global jailed_player
-    global finished_players
-    global finished_player_name
-
-    global player_score
-    global player_name
-    global player_number
-
+def card_analyser(player, scanned_card, model_picked, cards):
     finished_players = 0
-    finished_player_name = 0
+    finished_player_name = ""
 
     jailed_count = []
     jailed_player = []
 
-    #if someone gets a score over 100, jail them by adding the player name to a list to know when to skip a turn and a counter to know if people are still playing
+    player_score = player.score
+    player_name = player.name
+    player_number = 0
+
+    # If someone gets a score over 100, jail them
     if player.score >= 100:
         jailed_player.append(player.name)
-        if player.name in jailed_player:
-            print("=== You have been jailed ===")
-        jailed_count.append("")
+        print("=== You have been jailed ===")
+        jailed_count.append(player.name)
+
+    print("Scanned card:", scanned_card)
+
+
+        # Accept either a single card string or a list of card strings
+    if isinstance(scanned_card, list):
+        scanned_cards = scanned_card
+    else:
+        scanned_cards = [scanned_card]
 
     collected_cards = []
 
-    #Wait briefly so both NFC readers can finish sending
-    time.sleep(0.3)
+    for card_value in scanned_cards:
+        card_value = str(card_value).strip()
 
-    #Collect all incoming serial data
-    while ser.in_waiting > 0:
-        available = ser.readline()
-        print(f"Available data: {available}")
-        decode_card = available.decode("UTF-8").strip()
+        if card_value in ["", "NO_CARD", "READ_FAILED"]:
+            continue
 
-        #Split incoming IDs
-        clean_card = decode_card.split()
+        card_index = int(card_value)
 
-        #Convert to integers
-        final_card = [int(i) for i in clean_card]
-        collected_cards.extend(final_card)
-        #Tiny delay to allow next reader to finish
-        time.sleep(0.05)
+        if card_index < 0 or card_index >= len(cards):
+            print("Card index out of range:", card_index)
+            continue
 
-    print("Collected cards:", collected_cards)
+        collected_cards.append(card_index)
 
     score_tally = []
 
-    #Process all cards together
+        # model_picked is currently a list like ["Risk Model"]
+    model_name = model_picked[0]
+
+        # Process all matched cards
     for i in collected_cards:
         card_finder = cards.iloc[i]
-        score = card_finder[model_picked].item()
 
-        #Card re-use logic
+        score = card_finder[model_name]
+
+            # Card re-use logic
         cards.loc[i, player.name] += 1
+
         if cards.loc[i, player.name] == 3:
-            print("You can use", card_finder['Card'], "only once more")
+            print("You can use", card_finder["Card"], "only once more")
+
         if cards.loc[i, player.name] >= 4:
-            print("You've used", card_finder['Card'], "too much")
+            print("You've used", card_finder["Card"], "too much")
             break
         else:
             score_tally.append(score)
 
-    print(score_tally)
+    print("Score tally:", score_tally)
 
-    #Sum up the score for the turn and add it to the player's total score
+    # Sum up the score for the turn and add it to the player's total score
     turn_score = 0
+
     for item in score_tally:
         turn_score += item
 
-    print("score = ", turn_score)
+    print("score =", turn_score)
+
     player.score = player.score + turn_score
-    print("new score for", player.name, ": ", player.score)
+
+    print("new score for", player.name, ":", player.score)
+
     player_score = player.score
     player_name = player.name
 
-    #Assign player number for LCD display
+    # Assign player number for LCD display
     if player_name.endswith("1"):
         player_number = 1
     elif player_name.endswith("2"):
         player_number = 2
     elif player_name.endswith("3"):
         player_number = 3
+    elif player_name.endswith("4"):
+        player_number = 4
 
-    #Check if the player has reached 0 points and if so keep track of that for end game logic
+    # Check if the player has reached 0 points
     if player.score <= 0:
-        finished_players = finished_players + 1
+        finished_players += 1
         finished_player_name = player.name
 
-    #Clear leftover serial noise
-    ser.reset_input_buffer()
-
     return finished_players, finished_player_name, jailed_count, player_score, player_name, player_number
-    
+
