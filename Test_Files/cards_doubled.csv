@@ -1,0 +1,35 @@
+Room,Card,Risk Model,Unpredictability Model,Concealment Model,Obsession Model,player_1,player_2,player_3,player_4
+StudyStudy," ""Rarely responds to messages immediately across online platforms"" ""Rarely responds to messages immediately across online platforms""",-12,-20,24,-16,0.0,0.0,0.0,0.0
+StudyStudy," ""Tracks personal health metrics manually using online tools or spreadsheets"" ""Tracks personal health metrics manually using online tools or spreadsheets""",18,-18,-20,24,0.0,0.0,0.0,0.0
+StudyStudy," ""Uses private browsing mode regularly when browsing online"" ""Uses private browsing mode regularly when browsing online""",16,-14,28,-12,0.0,0.0,0.0,0.0
+StudyStudy," ""Clears browser history often after internet sessions"" ""Clears browser history often after internet sessions""",20,8,30,-10,0.0,0.0,0.0,0.0
+StudyStudy," ""Maintains minimal online presence"" ""Maintains minimal online presence""",-20,12,26,-16,0.0,0.0,0.0,0.0
+StudyStudy," ""Tracks time spent on tasks using productivity software"" ""Tracks time spent on tasks using productivity software""",14,-22,-16,20,0.0,0.0,0.0,0.0
+StudyStudy," ""Watches Climate Change documentaries at 3am"" ""Watches Climate Change documentaries at 3am""",22,18,-4,12,0.0,0.0,0.0,0.0
+StudyStudy," ""Uses productivity apps daily to organise digital workflow"" ""Uses productivity apps daily to organise digital workflow""",12,-16,-12,26,0.0,0.0,0.0,0.0
+BedroomBedroom," ""Visits NHS or medical websites frequently via personal devices"" ""Visits NHS or medical websites frequently via personal devices""",18,8,6,24,0.0,0.0,0.0,0.0
+BedroomBedroom," ""Searches symptoms late at night on social platforms"" ""Searches symptoms late at night on social platforms""",26,12,-10,20,0.0,0.0,0.0,0.0
+BedroomBedroom," ""Wakes up at the same time every day and checks social feeds"" ""Wakes up at the same time every day and checks social feeds""",10,-28,-8,28,0.0,0.0,0.0,0.0
+BedroomBedroom," ""Posts frequently on social media"" ""Posts frequently on social media""",-18,-12,-24,22,0.0,0.0,0.0,0.0
+BedroomBedroom," ""Oversleeps on work days after late-night device use"" ""Oversleeps on work days after late-night device use""",-14,20,4,-16,0.0,0.0,0.0,0.0
+BedroomBedroom," ""Often active online after midnight"" ""Often active online after midnight""",8,16,18,-12,0.0,0.0,0.0,0.0
+BedroomBedroom," ""Deletes posts with low engagement"" ""Deletes posts with low engagement""",22,14,20,28,0.0,0.0,0.0,0.0
+BedroomBedroom," ""Social media post suggests they rarely spend weekends at home"" ""Social media post suggests they rarely spend weekends at home""",8,26,6,-14,0.0,0.0,0.0,0.0
+Living roomLiving room," ""Cancels plans on short notice with friends"" ""Cancels plans on short notice with friends""",-12,28,12,-10,0.0,0.0,0.0,0.0
+Living roomLiving room," ""Has no active social media accounts"" ""Has no active social media accounts""",-24,10,26,-12,0.0,0.0,0.0,0.0
+Living roomLiving room," ""Rarely initiates conversations in social settings"" ""Rarely initiates conversations in social settings""",16,10,16,-18,0.0,0.0,0.0,0.0
+Living roomLiving room," ""Leaves home at inconsistent times"" ""Leaves home at inconsistent times""",-10,30,18,-20,0.0,0.0,0.0,0.0
+Living roomLiving room," ""Checks online maps often in their local area"" ""Checks online maps often in their local area""",14,8,-8,10,0.0,0.0,0.0,0.0
+Living roomLiving room," ""Travel patterns do not follow routine"" ""Travel patterns do not follow routine""",10,28,8,-10,0.0,0.0,0.0,0.0
+Living roomLiving room," ""Frequently changes location on weekends"" ""Frequently changes location on weekends""",-16,30,10,-8,0.0,0.0,0.0,0.0
+Living roomLiving room," ""Goes to the local pub multiple times a week"" ""Goes to the local pub multiple times a week""",-16,12,-12,-14,,,,
+KitchenKitchen," ""Buys vitamins and supplements frequently"" ""Buys vitamins and supplements frequently""",10,6,8,24,0.0,0.0,0.0,0.0
+KitchenKitchen," ""Rarely uses loyalty cards or subscriptions when shopping"" ""Rarely uses loyalty cards or subscriptions when shopping""",-12,-22,20,-10,0.0,0.0,0.0,0.0
+KitchenKitchen," ""Few recorded purchasing habits"" ""Few recorded purchasing habits""",-10,-16,24,-12,0.0,0.0,0.0,0.0
+KitchenKitchen," ""Rarely makes impulse purchases when shopping"" ""Rarely makes impulse purchases when shopping""",12,-24,-20,-8,0.0,0.0,0.0,0.0
+KitchenKitchen," ""Eats takeaway at a consistent time"" ""Eats takeaway at a consistent time""",8,-20,-8,12,0.0,0.0,0.0,0.0
+KitchenKitchen," ""Checks bank balance daily to monitor finances"" ""Checks bank balance daily to monitor finances""",22,18,-6,14,0.0,0.0,0.0,0.0
+KitchenKitchen," ""Exercises at scheduled times each week"" ""Exercises at scheduled times each week""",-10,-22,-10,24,0.0,0.0,0.0,0.0
+KitchenKitchen," ""Spends more money when socialising on food and drink"" ""Spends more money when socialising on food and drink""",16,12,-8,-6,0.0,0.0,0.0,0.0
+TestTest," ""Has a local business in the area"" ""Has a local business in the area""",-50,-50,-50,-50,0.0,0.0,0.0,0.0
+TestTest," ""Travels for work at the same time everyday"" ""Travels for work at the same time everyday""",-50,-50,-50,-50,0.0,0.0,0.0,0.0

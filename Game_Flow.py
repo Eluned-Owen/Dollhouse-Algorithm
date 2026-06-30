@@ -37,19 +37,25 @@ def start_wifi_server():
 Thread(target=start_wifi_server, daemon=True).start()
 
 # LCD Arduino still uses USB serial
-LCD_PORT = "COM7"
-lcd = serial.Serial(port=LCD_PORT, baudrate=9600, timeout=1)
+lcd = serial.Serial(port="COM7", baudrate=9600, timeout=1)
+printer = serial.Serial(port="COM4", baudrate=19200, timeout=1)
 
 time.sleep(2)
 lcd.reset_input_buffer()
+printer.reset_input_buffer()
 
 print(f"Connected to LCD Arduino on {lcd.name}")
+print(f"Connected to Printer Arduino on {printer.name}")
 print("Wi-Fi NFC server running on port 5000")
 
 Game_Start = input(str("Would you like to start the Dollhouse Algorithm? (y/n) "))
 
 if Game_Start == "y":
     player_count = int(input(str("Good, how many players are playing? (1-4) ")))
+
+    if Game_Start !=  "y":
+        print("Game turning off")
+        exit()
 
     if player_count < 1 or player_count > 4:
         print("This number isn't from 1-4")
@@ -65,11 +71,10 @@ if Game_Start == "y":
 
     def send_to_lcd(screen_number, line1, line2=""):
         message = f"LCD{screen_number}|{line1}|{line2}\n"
-        lcd.write(message.encode("utf-8"))
 
-    def clear_nfc_queue():
-        while not nfc_queue.empty():
-            nfc_queue.get()
+        print("Sending LCD:", message)
+
+        lcd.write(message.encode("utf-8"))
 
     players = []
 
@@ -84,68 +89,147 @@ if Game_Start == "y":
         "Obsession Model"
     ]
 
+    #picking the algorithm for the round
     picked = random.randrange(0, len(model_list))
     model_picked = [model_list[picked]]
 
+    print(model_picked)
+    
+    #importing the card data from the csv file
     cards = pandas.read_csv("behavioural_surplus.csv")
 
-    clear_nfc_queue()
     print("===== Game Start =====")
 
     turn = 1
+
     finished_players = 0
     finished_player_name = ""
-    jailed_count = []
 
-    while turn < 9:
-        print(f"== turn {turn} ==")
+    jailed_players = set()
+
+    #starting the game loop for 10 turns
+    while turn <= 10:
+
+        print(f"\n===== TURN {turn} =====")
 
         j = 0
 
+        #looping through each player for the turn
         while j < player_count:
+
             current_player = players[j]
+
+            # Skip jailed players
+            if current_player.name in jailed_players:
+
+                print(current_player.name, "is jailed")
+
+                send_to_lcd(
+                    str(current_player.number),
+                    "JAILED",
+                    "TURN SKIPPED"
+                )
+
+                j += 1
+                continue
 
             print(f"Waiting for {current_player.name} to scan...")
 
-            # Wait for Arduino Uno R4 WiFi to send a scanned card
             scan_data = nfc_queue.get()
 
+            print("Queue returned:", scan_data)
+
             nfc_values = scan_data["cards"]
+            #print("About to call analyser")
 
-            print(f"{current_player.name} scanned cards: {nfc_values}")
+            # No cards on either reader
+            if nfc_values[0] == "NO_CARD" and nfc_values[1] == "NO_CARD":
 
-            finished_players, finished_player_name, jailed_count, player_score, player_name, player_number = card_analyser(
-                current_player,
-                nfc_values,
-                model_picked,
-                cards
-            )
-            
+                print("No cards scanned. Waiting again...")
+
+                continue
+            try:
+                (
+                    finished_players,
+                    finished_player_name,
+                    player_jailed,
+                    player_score,
+                    player_name,
+                    player_number,
+                    printer,
+                    turn
+                ) = card_analyser(
+                    current_player,
+                    nfc_values,
+                    model_picked,
+                    cards,
+                    printer,
+                    turn
+                )
+
+            except Exception as e:
+                import traceback
+                print("CARD ANALYSER ERROR:")
+                traceback.print_exc()
+
             send_to_lcd(
-                player_number,
+                str(player_number),
                 f"{player_name} score:",
                 str(player_score)
             )
 
+            print(
+                f"LCD DEBUG: {player_number} "
+                f"{player_name} "
+                f"{player_score}"
+            )
+
+            if player_jailed:
+
+                jailed_players.add(current_player.name)
+
+                send_to_lcd(
+                    str(player_number),
+                    "YOU ARE",
+                    "JAILED"
+                )
+            print(f"===== END TURN {turn} =====")
             j += 1
+        turn += 1
+
+    # Entire round finished
+    active_players = player_count - len(jailed_players)
+
+    if active_players <= 0:
+
+        print("All players jailed")
+
+        send_to_lcd("1", "EVERYONE", "JAILED")
+        send_to_lcd("2", "EVERYONE", "JAILED")
+        exit()
+
+    if finished_players > 0:
+        print(
+            f"{finished_player_name} "
+            "has reached 0 points"
+        )
+
+        send_to_lcd(
+            "1",
+            f"{finished_player_name}",
+            "WINS"
+        )
+
+        send_to_lcd(
+            "2",
+            f"{finished_player_name}",
+            "WINS"
+        )
+        exit()
 
         turn += 1
-        print("== end turn", turn, "==")
 
-        if player_count == 1 and len(jailed_count) >= player_count:
-            print("You have been jailed by the algorithm, try again next time :)")
-            break
+    print("===== GAME OVER =====")
 
-        if player_count > 1 and len(jailed_count) >= player_count:
-            print("All players have been jailed by the algorithm, try again next time :)")
-            break
-
-        if finished_players == 1:
-            print("========", finished_player_name, "has reached 0 points, game over! ========")
-            break
-
-        if turn >= 9:
-            send_to_lcd(1, "Game end", " ")
-            send_to_lcd(2, "Game end", " ")
-            send_to_lcd(3, "Game end", " ")
-            print("== game end ==")
+    send_to_lcd("1", "GAME", "OVER")
+    send_to_lcd("2", "GAME", "OVER")

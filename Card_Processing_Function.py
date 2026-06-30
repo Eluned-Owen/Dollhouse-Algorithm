@@ -1,25 +1,16 @@
 import time
 
 
-def card_analyser(player, scanned_card, model_picked, cards):
+def card_analyser(player, scanned_card, model_picked, cards, printer, turn):
+    print("ENTERED CARD ANALYSER")
     finished_players = 0
     finished_player_name = ""
-
-    jailed_count = []
-    jailed_player = []
 
     player_score = player.score
     player_name = player.name
     player_number = 0
 
-    # If someone gets a score over 100, jail them
-    if player.score >= 100:
-        jailed_player.append(player.name)
-        print("=== You have been jailed ===")
-        jailed_count.append(player.name)
-
-    print("Scanned card:", scanned_card)
-
+    player_jailed = False
 
         # Accept either a single card string or a list of card strings
     if isinstance(scanned_card, list):
@@ -34,14 +25,14 @@ def card_analyser(player, scanned_card, model_picked, cards):
 
         if card_value in ["", "NO_CARD", "READ_FAILED"]:
             continue
-
         card_index = int(card_value)
+        row_number = card_index - 1
 
-        if card_index < 0 or card_index >= len(cards):
+        if row_number < 0 or row_number >= len(cards):
             print("Card index out of range:", card_index)
             continue
 
-        collected_cards.append(card_index)
+        collected_cards.append(row_number)
 
     score_tally = []
 
@@ -66,6 +57,7 @@ def card_analyser(player, scanned_card, model_picked, cards):
         else:
             score_tally.append(score)
 
+
     print("Score tally:", score_tally)
 
     # Sum up the score for the turn and add it to the player's total score
@@ -78,10 +70,15 @@ def card_analyser(player, scanned_card, model_picked, cards):
 
     player.score = player.score + turn_score
 
+    if player.score >= 100:
+        player_jailed = True
+        print("=== You have been jailed ===")
+
     print("new score for", player.name, ":", player.score)
 
     player_score = player.score
     player_name = player.name
+
 
     # Assign player number for LCD display
     if player_name.endswith("1"):
@@ -90,13 +87,28 @@ def card_analyser(player, scanned_card, model_picked, cards):
         player_number = 2
     elif player_name.endswith("3"):
         player_number = 3
-    elif player_name.endswith("4"):
-        player_number = 4
+
+
+    turn_str = str(turn)
+    turn_num_encode = turn_str.encode("utf-8")
+
+    encoded_name = player.name.encode("utf-8")
+    encoded_column = ": ".encode("utf-8")
+    encoded_divider = " | ".encode("utf-8")
+    encoded_turn_first = str(turn_score)
+    encoded_turn = encoded_turn_first.encode("utf-8")
+
+    print_name = encoded_name + encoded_column
+
+    #printer.write(encoded_divider)
+    #printer.write(print_name)
+    #printer.write(encoded_turn)
 
     # Check if the player has reached 0 points
     if player.score <= 0:
         finished_players += 1
         finished_player_name = player.name
+    
 
-    return finished_players, finished_player_name, jailed_count, player_score, player_name, player_number
+    return finished_players, finished_player_name, player_jailed, player_score, player_name, player_number, printer, turn
 

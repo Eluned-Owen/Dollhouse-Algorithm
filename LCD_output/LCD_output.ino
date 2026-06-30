@@ -2,26 +2,26 @@
 #include <Adafruit_LiquidCrystal.h>
 
 //Initialising the LCDs 
-Adafruit_LiquidCrystal lcd_1(2);
-Adafruit_LiquidCrystal lcd_2(1);
-Adafruit_LiquidCrystal lcd_3(0);
+//Adafruit_LiquidCrystal lcd_1(2);
+Adafruit_LiquidCrystal lcd_1(1);
+Adafruit_LiquidCrystal lcd_2(0);
 
 void setup() {
   Serial.begin(9600);
   Serial.setTimeout(100);
 
   lcd_1.begin(16, 2);
+  //lcd_2.begin(16, 2);
   lcd_2.begin(16, 2);
-  lcd_3.begin(16, 2);
 
   //Starting the LCD backlight
   lcd_1.setBacklight(HIGH);
+  //lcd_2.setBacklight(HIGH);
   lcd_2.setBacklight(HIGH);
-  lcd_3.setBacklight(HIGH);
 
-  lcd_1.print("LCD 1 ready");
-  lcd_2.print("LCD 2 ready");
-  lcd_3.print("LCD 3 ready");
+  lcd_1.print("Player 1 ready");
+  //lcd_2.print("LCD 2 ready");
+  lcd_2.print("Player 2 ready");
 }
 
 void printToLCD(Adafruit_LiquidCrystal &lcd, String line1, String line2) {
@@ -63,10 +63,8 @@ void loop() {
     //Send the extracted text to the correct LCD screen
     if (target == "LCD1") {
       printToLCD(lcd_1, line1, line2);
-    } else if (target == "LCD2") {
+    }else if (target == "LCD2") {
       printToLCD(lcd_2, line1, line2);
-    } else if (target == "LCD3") {
-      printToLCD(lcd_3, line1, line2);
     }
   }
 }

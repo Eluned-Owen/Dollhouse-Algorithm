@@ -27,7 +27,7 @@ Room,Card,Risk Model,Unpredictability Model,Concealment Model,Obsession Model,pl
 "Kitchen", "Rarely uses loyalty cards or subscriptions when shopping", -6, -11, 10, -5, 0, 0, 0, 0
 "Kitchen", "Few recorded purchasing habits", -5, -8, 12, -6, 0, 0, 0, 0
 "Kitchen", "Rarely makes impulse purchases when shopping", 6, -12, -10, -4, 0, 0, 0, 0
-"Kitchen", "Eats takeaway at a consistant time", 4, -10, -4, 6, 0, 0, 0, 0
+"Kitchen", "Eats takeaway at a consistent time", 4, -10, -4, 6, 0, 0, 0, 0
 "Kitchen", "Checks bank balance daily to monitor finances", 11, 9, -3, 7, 0, 0, 0, 0
 "Kitchen", "Exercises at scheduled times each week", -5, -11, -5, 12, 0, 0, 0, 0
 "Kitchen", "Spends more money when socialising on food and drink", 8, 6, -4, -3, 0, 0, 0, 0
