@@ -54,4 +54,4 @@ Arduino IDE (C++):
 
 Tip: Your first goal should be to find out which traits the algorithm is biased towards, and then cater your card combinations to be unlike the bias as much as you can!
 
-<img src= "[https://ibb.co/2YRSPT8G](https://i.ibb.co/k6zJ0t3N/festival.jpg)"  alt="A table top game with a miniature dollhoue and cards">
+<img src= "https://i.ibb.co/k6zJ0t3N/festival.jpg"  alt="A table top game with a miniature dollhoue and cards">
