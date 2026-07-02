@@ -65,4 +65,4 @@ Tip: Your first goal should be to find out which traits the algorithm is biased 
 <img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-8.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
 <img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-9.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
 <img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-10.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-11.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+
