@@ -1,5 +1,5 @@
 <h1>Dollhouse Algorithm</h1>
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/05/dollhouseLazyOne.png"  alt="A table top game with a miniature dollhoue and cards"
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/05/dollhouseLazyOne.png"  alt="A table top game with a miniature dollhoue and cards">
 
 Dollhouse Algorithm is an arduino powered table top game where a biased algorithm thinks the player is the killer, the players must reduce the algorithms suspicion by
 identifying what traits the algorithm is biased towards and then building a digital trail that the algorithm deems unsuspicious. Gameplay loop includes NFC stickered 
@@ -13,15 +13,16 @@ Blog: https://23008862.myblog.arts.ac.uk/the-dollhouse-algorithm/
 <h3> Getting Started </h3>
 The project needs the following physical components:
 <ul>
-<li>3 x LCD</li>
+<li>2 x LCD</li>
 <li>1 x Button</li>
 <li>1 x Arduino Leonardo </li>
 <li>1 x Arduino Uno R4 WiFi</li>
-<li>1 x 8-channel level shifter</li>
+<li>2 x 8-channel level shifter</li>
 <li>1 x Medium Bread board</li>
-<li>1 x Mini Bread Board</li>
+<li>3 x Mini Bread Board</li>
 <li>2 x NFC readers</li>
-<li>1 x Laptop for Serial communications  </li>
+<li>1 x Laptop for Serial communications </li>
+<li>WiFi or a hotspot</li>
 </ul>
 
 The project depends on the following digital libraries:
@@ -52,3 +53,16 @@ Arduino IDE (C++):
 </ol>
 
 Tip: Your first goal should be to find out which traits the algorithm is biased towards, and then cater your card combinations to be unlike the bias as much as you can!
+
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-1.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-2.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-3.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-4.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-5.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-6.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-7.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-8.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-9.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-10.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+
