@@ -54,15 +54,18 @@ Arduino IDE (C++):
 
 Tip: Your first goal should be to find out which traits the algorithm is biased towards, and then cater your card combinations to be unlike the bias as much as you can!
 
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-1.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-2.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-3.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-4.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-5.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-6.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-7.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-8.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-9.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
-<img src= "https://23008862.myblog.arts.ac.uk/files/2026/07/image-10.png" alt="A slideshow of the steps taken to create Dollhouse Algorithm">
+  
+
+<img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/29e27d63-2764-46bd-9c97-b1ce11a6710b" />
+<img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/8ee08fce-65dc-4d79-8b0b-0552bb53ed1f" />
+<img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/70fa82f2-7e92-427a-a762-da83ccb4cedd" />
+<img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/b105f623-ead7-4ddc-b91e-dadd40aa9248" />
+<img width="1920" height="1080" alt="5" src="https://github.com/user-attachments/assets/949932ec-d5cf-4ea4-a03e-85c1b29ddcea" />
+<img width="1920" height="1080" alt="6" src="https://github.com/user-attachments/assets/27f4f23a-1fef-4240-9c44-13d603a1690b" />
+<img width="1920" height="1080" alt="7" src="https://github.com/user-attachments/assets/dc47c349-b47b-4d32-b5ac-68d14da3112c" />
+<img width="1920" height="1080" alt="8" src="https://github.com/user-attachments/assets/685f19c8-66ef-4e96-ae11-e0c8e44185e6" />
+<img width="1920" height="1080" alt="9" src="https://github.com/user-attachments/assets/7c6e4d03-718d-4c1e-8a7d-233286fd603d" />
+<img width="1920" height="1080" alt="10" src="https://github.com/user-attachments/assets/f161d040-bffd-468b-bd25-8d68d0466632" />
+<img width="1920" height="1080" alt="11" src="https://github.com/user-attachments/assets/36bd7a79-6db0-4536-9e89-90705a000d9d" />
+
 
