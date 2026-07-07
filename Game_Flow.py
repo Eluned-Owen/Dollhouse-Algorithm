@@ -38,14 +38,14 @@ Thread(target=start_wifi_server, daemon=True).start()
 
 # LCD Arduino still uses USB serial
 lcd = serial.Serial(port="COM7", baudrate=9600, timeout=1)
-printer = serial.Serial(port="COM4", baudrate=19200, timeout=1)
+#printer = serial.Serial(port="COM4", baudrate=19200, timeout=1)
 
 time.sleep(2)
 lcd.reset_input_buffer()
-printer.reset_input_buffer()
+#printer.reset_input_buffer()
 
 print(f"Connected to LCD Arduino on {lcd.name}")
-print(f"Connected to Printer Arduino on {printer.name}")
+#print(f"Connected to Printer Arduino on {printer.name}")
 print("Wi-Fi NFC server running on port 5000")
 
 Game_Start = input(str("Would you like to start the Dollhouse Algorithm? (y/n) "))
@@ -156,14 +156,12 @@ if Game_Start == "y":
                     player_score,
                     player_name,
                     player_number,
-                    printer,
                     turn
                 ) = card_analyser(
                     current_player,
                     nfc_values,
                     model_picked,
                     cards,
-                    printer,
                     turn
                 )
 
@@ -193,9 +191,10 @@ if Game_Start == "y":
                     "YOU ARE",
                     "JAILED"
                 )
-            print(f"===== END TURN {turn} =====")
             j += 1
-        turn += 1
+        print(f"===== END TURN {turn} =====")
+        turn = turn + 1
+    
 
     # Entire round finished
     active_players = player_count - len(jailed_players)

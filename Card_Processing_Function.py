@@ -1,8 +1,4 @@
-import time
-
-
-def card_analyser(player, scanned_card, model_picked, cards, printer, turn):
-    print("ENTERED CARD ANALYSER")
+def card_analyser(player, scanned_card, model_picked, cards, turn):
     finished_players = 0
     finished_player_name = ""
 
@@ -26,13 +22,8 @@ def card_analyser(player, scanned_card, model_picked, cards, printer, turn):
         if card_value in ["", "NO_CARD", "READ_FAILED"]:
             continue
         card_index = int(card_value)
-        row_number = card_index - 1
 
-        if row_number < 0 or row_number >= len(cards):
-            print("Card index out of range:", card_index)
-            continue
-
-        collected_cards.append(row_number)
+        collected_cards.append(card_index)
 
     score_tally = []
 
@@ -66,6 +57,12 @@ def card_analyser(player, scanned_card, model_picked, cards, printer, turn):
     for item in score_tally:
         turn_score += item
 
+    if turn > 5:
+        print("multiplier is on")
+        turn_score *= 1.5
+    
+    turn_score = round(turn_score)
+
     print("score =", turn_score)
 
     player.score = player.score + turn_score
@@ -89,16 +86,16 @@ def card_analyser(player, scanned_card, model_picked, cards, printer, turn):
         player_number = 3
 
 
-    turn_str = str(turn)
-    turn_num_encode = turn_str.encode("utf-8")
+    #turn_str = str(turn)
+    #turn_num_encode = turn_str.encode("utf-8")
 
-    encoded_name = player.name.encode("utf-8")
-    encoded_column = ": ".encode("utf-8")
-    encoded_divider = " | ".encode("utf-8")
-    encoded_turn_first = str(turn_score)
-    encoded_turn = encoded_turn_first.encode("utf-8")
+    #encoded_name = player.name.encode("utf-8")
+    #encoded_column = ": ".encode("utf-8")
+    #encoded_divider = " | ".encode("utf-8")
+    #encoded_turn_first = str(turn_score)
+    #encoded_turn = encoded_turn_first.encode("utf-8")
 
-    print_name = encoded_name + encoded_column
+    #print_name = encoded_name + encoded_column
 
     #printer.write(encoded_divider)
     #printer.write(print_name)
@@ -110,5 +107,5 @@ def card_analyser(player, scanned_card, model_picked, cards, printer, turn):
         finished_player_name = player.name
     
 
-    return finished_players, finished_player_name, player_jailed, player_score, player_name, player_number, printer, turn
+    return finished_players, finished_player_name, player_jailed, player_score, player_name, player_number, turn
 
